@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wildfire Patterns Across California</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/globe.gl"></script>
+</head>
+<body>
+
+  <div id="top"></div>
+
+  <div class="page-shell">
+    <nav class="navbar">
+      <div class="logo">
+        <span class="logo-icon">🔥</span>
+        <span class="logo-text">Wildfire</span>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#data">Data & Sources</a></li>
+        <li><a href="#methodology">Methodology</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#discussion">Discussion</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </nav>
+
+    <section id="home" class="hero">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <h1>Mapping Wildfire Patterns Across California</h1>
+          <p class="subtitle">
+            An interactive geospatial exploration of wildfire distribution, intensity,
+            and spatial trends across California.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#results" class="cta-btn">Explore Results</a>
+            <a href="#methodology" class="secondary-btn">View Methodology</a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="globe-glow"></div>
+          <div class="orbit orbit-1"></div>
+          <div class="orbit orbit-2"></div>
+          <div id="globeViz"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="data" class="content-section">
+      <div class="section-shell">
+        <div class="section-header">
+          <p class="section-kicker">Project Foundation</p>
+          <h2>Data & Sources</h2>
+          <p class="section-intro">
+            This project uses historical wildfire perimeter data and supporting reference datasets
+            to examine wildfire patterns across California. The main source is CAL FIRE FRAP, and
+            the additional derived fields support filtering, comparison, and interpretation in the
+            web map and app.
+          </p>
+        </div>
+
+        <div class="data-grid">
+          <article class="source-card">
+            <div class="source-icon">🗂</div>
+            <h3>CAL FIRE FRAP</h3>
+            <ul>
+              <li>Primary wildfire perimeter dataset</li>
+              <li>Used for historical wildfire records across California</li>
+              <li>Supports size, cause, duration, and complexity analysis</li>
+            </ul>
+            <div class="source-links">
+              <a href="https://www.fire.ca.gov/" target="_blank" rel="noopener noreferrer">Explore on source website</a>
+              <a href="https://data.ca.gov/dataset/?q=Fire+Perimeters" target="_blank" rel="noopener noreferrer">California Open Data search</a>
+              <a href="https://data.ca.gov/dataset/california-historical-fire-perimeters" target="_blank" rel="noopener noreferrer">Historical Fire Perimeters</a>
+              <a href="https://gis.data.cnra.ca.gov/maps/CALFIRE-Forestry::california-historical-fire-perimeters/about" target="_blank" rel="noopener noreferrer">CNRA dataset page</a>
+            </div>
+          </article>
+
+          <article class="source-card">
+            <div class="source-icon">📄</div>
+            <h3>Field Details & Data Dictionary</h3>
+            <ul>
+              <li>Official field descriptions for source wildfire attributes</li>
+              <li>Used to validate source fields and derived fields</li>
+              <li>Supports methodology and metadata documentation</li>
+            </ul>
+            <div class="source-links">
+              <a href="https://34c031f8-c9fd-4018-8c5a-4159cdff6b0d-cdn-endpoint.azureedge.net/-/media/calfire-website/what-we-do/fire-resource-assessment-program---frap/data-dictionary-updated-april-2025.pdf" target="_blank" rel="noopener noreferrer">Explore on source website</a>
+            </div>
+          </article>
+
+          <article class="source-card">
+            <div class="source-icon">📏</div>
+            <h3>NWCG Fire Size Reference</h3>
+            <ul>
+              <li>Reference for standard wildfire size classes</li>
+              <li>Used to support A–G fire size classification</li>
+              <li>Helps connect acreage ranges to recognized fire size classes</li>
+            </ul>
+            <div class="source-links">
+              <a href="https://www.nwcg.gov/publications/pms205/nwcg-glossary-of-wildland-fire-pms-205/size-class-of-fire" target="_blank" rel="noopener noreferrer">Explore on source website</a>
+            </div>
+          </article>
+
+          <article class="source-card">
+            <div class="source-icon">📅</div>
+            <h3>Temporal Fields</h3>
+            <ul>
+              <li>Derived from fire alarm dates</li>
+              <li>Includes discovery month and season categories</li>
+              <li>Used for temporal filtering and interpretation</li>
+            </ul>
+          </article>
+
+          <article class="source-card">
+            <div class="source-icon">⚡</div>
+            <h3>Cause Classification</h3>
+            <ul>
+              <li>Derived from CAL FIRE cause codes</li>
+              <li>Grouped into Natural, Human-Related, and Unknown</li>
+              <li>Used for thematic filtering and popup summaries</li>
+            </ul>
+          </article>
+
+          <article class="source-card">
+            <div class="source-icon">🔗</div>
+            <h3>Derived Analytical Fields</h3>
+            <ul>
+              <li>Includes size, duration, cause, season, and complexity fields</li>
+              <li>Created to improve interpretation and interaction</li>
+              <li>Used throughout the web map and app</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="limitations-panel warning-panel">
+          <h3>⚠ Data Limitations</h3>
+          <ul>
+            <li>Some source records contain missing or inconsistent dates.</li>
+            <li>Duration-related fields required validation and may still contain No Data values.</li>
+            <li>This project is intended for academic analysis and visualization, not operational wildfire response.</li>
+          </ul>
+        </div>
+
+        <div class="back-top-wrap">
+          <a href="#top" class="back-top">↑ Back to top</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="methodology" class="content-section">
+      <div class="section-shell">
+        <div class="section-header">
+          <p class="section-kicker">Workflow</p>
+          <h2>Methodology</h2>
+          <p class="section-intro">
+            The wildfire dataset was cleaned, classified, and prepared for interactive web mapping
+            using ArcGIS Pro, ArcGIS Online, Arcade, Experience Builder, and Carto.
+          </p>
+        </div>
+
+        <div class="method-grid method-grid-five">
+          <article class="method-card">
+            <span class="method-step">01</span>
+            <h3>Data Ingestion</h3>
+            <p>Imported historical wildfire perimeter data and reviewed the original structure.</p>
+          </article>
+
+          <article class="method-card">
+            <span class="method-step">02</span>
+            <h3>Data Cleaning</h3>
+            <p>Removed unnecessary fields and checked records for nulls, inconsistencies, and invalid dates.</p>
+          </article>
+
+          <article class="method-card">
+            <span class="method-step">03</span>
+            <h3>Derived Fields</h3>
+            <p>Created new fields for fire size, cause grouping, duration, season, month, and complexity.</p>
+          </article>
+
+          <article class="method-card">
+            <span class="method-step">04</span>
+            <h3>ArcGIS Online & Web Map</h3>
+            <p>Published thematic layers, configured symbology, and used Arcade expressions to improve popup readability.</p>
+          </article>
+
+          <article class="method-card">
+            <span class="method-step">05</span>
+            <h3>Experience Builder App</h3>
+            <p>Built a guided exploration app with layer-based themes, filters, popup interaction, and usage instructions.</p>
+          </article>
+        </div>
+
+        <div class="field-docs">
+          <h3 class="field-docs-title">Derived Field Reference</h3>
+
+          <article class="field-doc-card split-doc">
+            <div class="doc-left">
+              <h4>Field Name: Fire_Size_Class</h4>
+              <p><strong>Field Alias:</strong> Fire Size Class</p>
+              <p><strong>Purpose:</strong> Classifies fire size into standard A to G categories using GIS acreage.</p>
+              <p><strong>Description:</strong> Used to symbolize fire size and compare wildfire magnitude across the state.</p>
+            </div>
+            <div class="doc-right">
+              <p><strong>Expression</strong></p>
+              <code>classify(!GIS_ACRES!)</code>
+              <pre><code>def classify(acres):
+    if acres is None:
+        return None
+    elif acres <= 0.25:
+        return "A"
+    elif acres < 10:
+        return "B"
+    elif acres < 100:
+        return "C"
+    elif acres < 300:
+        return "D"
+    elif acres < 1000:
+        return "E"
+    elif acres < 5000:
+        return "F"
+    else:
+        return "G"</code></pre>
+            </div>
+          </article>
+
+          <article class="field-doc-card split-doc">
+            <div class="doc-left">
+              <h4>Field Name: Fire_Duration_Days</h4>
+              <p><strong>Field Alias:</strong> Fire Duration Days</p>
+              <p><strong>Purpose:</strong> Calculates fire duration in days using alarm and containment dates.</p>
+              <p><strong>Description:</strong> Supports duration analysis while filtering out invalid or inconsistent records.</p>
+            </div>
+            <div class="doc-right">
+              <p><strong>Expression</strong></p>
+              <code>duration_days(!ALARM_DATE!, !CONT_DATE!, !YEAR_!)</code>
+              <pre><code>from datetime import datetime
+
+def duration_days(alarm_date, cont_date, fire_year):
+    if alarm_date is None or cont_date is None or fire_year is None:
+        return None
+
+    if alarm_date.year < 1900 or cont_date.year < 1900:
+        return None
+
+    if abs(alarm_date.year - fire_year) > 1:
+        return None
+    if cont_date.year < fire_year - 1 or cont_date.year > fire_year + 2:
+        return None
+
+    a = datetime(alarm_date.year, alarm_date.month, alarm_date.day)
+    c = datetime(cont_date.year, cont_date.month, cont_date.day)
+
+    diff = (c - a).days
+
+    if diff < 0:
+        return None
+
+    return diff</code></pre>
+            </div>
+          </article>
+
+          <article class="field-doc-card split-doc">
+            <div class="doc-left">
+              <h4>Field Name: Cause_Group</h4>
+              <p><strong>Field Alias:</strong> Cause Group</p>
+              <p><strong>Purpose:</strong> Groups fire causes into Natural, Human-Related, and Unknown categories.</p>
+              <p><strong>Description:</strong> Used for simplified thematic filtering and comparative cause analysis.</p>
+            </div>
+            <div class="doc-right">
+              <p><strong>Expression</strong></p>
+              <code>cause_group(!CAUSE!)</code>
+              <pre><code>def cause_group(cause):
+    if cause is None:
+        return "Unknown"
+    elif cause in [1, 17]:
+        return "Natural"
+    elif cause == 14:
+        return "Unknown"
+    else:
+        return "Human-Related"</code></pre>
+            </div>
+          </article>
+
+          <article class="field-doc-card split-doc">
+            <div class="doc-left">
+              <h4>Field Name: Cause_Label</h4>
+              <p><strong>Field Alias:</strong> Cause Label</p>
+              <p><strong>Purpose:</strong> Converts numeric cause codes into readable wildfire cause labels.</p>
+              <p><strong>Description:</strong> Improves popup readability and makes cause information more interpretable.</p>
+            </div>
+            <div class="doc-right">
+              <p><strong>Expression</strong></p>
+              <code>cause_label(!CAUSE!)</code>
+              <pre><code>def cause_label(cause):
+    mapping = {
+        1: "Lightning",
+        2: "Equipment Use",
+        3: "Smoking",
+        4: "Campfire",
+        5: "Debris",
+        6: "Railroad",
+        7: "Arson",
+        8: "Playing with Fire",
+        9: "Miscellaneous",
+        10: "Vehicle",
+        11: "Powerline",
+        12: "Firefighter Training",
+        13: "Non-Firefighter Training",
+        14: "Unknown/Unidentified",
+        15: "Structure",
+        16: "Aircraft",
+        17: "Volcanic",
+        18: "Escaped Prescribed Burn",
+        19: "Illegal Alien Campfire"
+    }
+    return mapping.get(cause, "Other/Uncoded")</code></pre>
+            </div>
+          </article>
+
+          <article class="field-doc-card split-doc">
+            <div class="doc-left">
+              <h4>Field Name: Duration_Category</h4>
+              <p><strong>Field Alias:</strong> Duration Category</p>
+              <p><strong>Purpose:</strong> Groups fire durations into readable categories for thematic display.</p>
+              <p><strong>Description:</strong> Used to compare fire persistence and support duration-based filters.</p>
+            </div>
+            <div class="doc-right">
+              <p><strong>Expression</strong></p>
+              <code>duration_cat(!Fire_Duration_Days!)</code>
+              <pre><code>def duration_cat(days):
+    if days is None:
+        return None
+    elif days <= 1:
+        return "Very Short"
+    elif days <= 7:
+        return "Short"
+    elif days <= 30:
+        return "Moderate"
+    elif days <= 90:
+        return "Long"
+    else:
+        return "Extended"</code></pre>
+            </div>
+          </article>
+
+          <article class="field-doc-card split-doc">
+            <div class="doc-left">
+              <h4>Field Name: Discovery_Month</h4>
+              <p><strong>Field Alias:</strong> Discovery Month</p>
+              <p><strong>Purpose:</strong> Extracts the month in which the fire was discovered.</p>
+              <p><strong>Description:</strong> Supports month-based temporal interpretation and filtering.</p>
+            </div>
+            <div class="doc-right">
+              <p><strong>Expression</strong></p>
+              <code>get_month(!ALARM_DATE!)</code>
+              <pre><code>def get_month(alarm_date):
+    if alarm_date is None:
+        return None
+
+    months = {
+        1: "January", 2: "February", 3: "March", 4: "April",
+        5: "May", 6: "June", 7: "July", 8: "August",
+        9: "September", 10: "October", 11: "November", 12: "December"
+    }
+
+    return months.get(alarm_date.month, None)</code></pre>
+            </div>
+          </article>
+
+          <article class="field-doc-card split-doc">
+            <div class="doc-left">
+              <h4>Field Name: Fire_Season</h4>
+              <p><strong>Field Alias:</strong> Fire Season</p>
+              <p><strong>Purpose:</strong> Groups fire records into seasonal categories.</p>
+              <p><strong>Description:</strong> Used for season-based wildfire analysis and thematic filtering.</p>
+            </div>
+            <div class="doc-right">
+              <p><strong>Expression</strong></p>
+              <code>get_season(!ALARM_DATE!)</code>
+              <pre><code>def get_season(alarm_date):
+    if alarm_date is None:
+        return None
+
+    month = alarm_date.month
+
+    if month in [12, 1, 2]:
+        return "Winter"
+    elif month in [3, 4, 5]:
+        return "Spring"
+    elif month in [6, 7, 8]:
+        return "Summer"
+    elif month in [9, 10, 11]:
+        return "Fall"
+    else:
+        return None</code></pre>
+            </div>
+          </article>
+
+          <article class="field-doc-card split-doc">
+            <div class="doc-left">
+              <h4>Field Name: Complex_Fire_Flag</h4>
+              <p><strong>Field Alias:</strong> Complex Fire Flag</p>
+              <p><strong>Purpose:</strong> Identifies whether a fire is part of a complex fire incident based on COMPLEX_ID.</p>
+              <p><strong>Description:</strong> Adds operational context and supports comparison between complex and non-complex incidents.</p>
+            </div>
+            <div class="doc-right">
+              <p><strong>Expression</strong></p>
+              <code>complex_flag(!COMPLEX_ID!)</code>
+              <pre><code>def complex_flag(complex_id):
+    if complex_id is None:
+        return "Not Complex"
+
+    if str(complex_id).strip() == "":
+        return "Not Complex"
+
+    return "Complex"</code></pre>
+            </div>
+          </article>
+        </div>
+
+        <div class="popup-config-section">
+          <h3 class="field-docs-title">Popup Configuration</h3>
+
+          <article class="field-doc-card split-doc">
+            <div class="doc-left">
+              <h4>Popup Styling & Content</h4>
+              <p><strong>Purpose:</strong> Configure wildfire popups so they are readable, structured, and consistent with the web app theme.</p>
+              <p><strong>Where used:</strong> ArcGIS Online Web Map popup configuration</p>
+              <p><strong>Components:</strong> Arcade expression for logic and HTML for presentation</p>
+              <p><strong>Description:</strong> Arcade was used to organize wildfire attributes into a clean summary, while custom HTML was used to style the popup content with a darker background, padding, and rounded edges to better match the application interface.</p>
+            </div>
+
+            <div class="doc-right">
+              <p><strong>Arcade Expression</strong></p>
+              <pre><code>// Arcade expression for popup: Detailed wildfire info in readable format
+
+var fireYear = $feature["YEAR_"];
+var fireClass = $feature["Fire_Size_Class"];
+var fireAcres = $feature["GIS_ACRES"];
+var fireDuration = $feature["Duration_Category"];
+var fireCause = $feature["Cause_Group"];
+var fireSeason = $feature["Fire_Season"];
+var fireComplexity = $feature["Complex_Fire_Flag"];
+
+// Handle null values
+fireYear = IIf(IsEmpty(fireYear), "Not Available", Text(fireYear));
+fireClass = IIf(IsEmpty(fireClass), "Not Available", fireClass);
+fireDuration = IIf(IsEmpty(fireDuration), "Not Available", fireDuration);
+fireCause = IIf(IsEmpty(fireCause), "Not Available", fireCause);
+fireSeason = IIf(IsEmpty(fireSeason), "Not Available", fireSeason);
+fireComplexity = IIf(IsEmpty(fireComplexity), "Not Available", fireComplexity);
+
+// Burn area formatting
+var burnArea = "Not Available";
+if (!IsEmpty(fireAcres)) {
+    burnArea = Text(Round(fireAcres, 0), "#,###") + " acres";
+}
+
+// Convert size class to readable label
+var sizeLabel = Decode(
+    fireClass,
+    "A", "Very Small",
+    "B", "Small",
+    "C", "Moderate",
+    "D", "Medium",
+    "E", "Large",
+    "F", "Very Large",
+    "G", "Extreme",
+    fireClass
+);
+
+// Slightly cleaner cause text
+var causeLabel = fireCause;
+if (fireCause == "Unknown") {
+    causeLabel = "Unknown (No data reported)";
+}
+
+// Build popup text
+var text =
+    "📅 Year: " + fireYear + TextFormatting.NewLine +
+    "📏 Size: " + sizeLabel + TextFormatting.NewLine +
+    "🔥 Burn Area: " + burnArea + TextFormatting.NewLine +
+    "⏱ Duration: " + fireDuration + TextFormatting.NewLine +
+    "⚡ Cause: " + causeLabel + TextFormatting.NewLine +
+    "🌦 Season: " + fireSeason + TextFormatting.NewLine +
+    "🔗 Complexity: " + fireComplexity;
+
+return text;</code></pre>
+
+              <p><strong>Popup HTML</strong></p>
+              <pre><code>&lt;div style="
+    background-color: #1c2f3a;
+    color: #e0e0e0;
+    padding: 12px 14px;
+    border-radius: 6px;
+    border: 1px solid #2a3f4d;
+    font-size: 13px;
+    line-height: 1.5;
+"&gt;
+    {expression/expr0}
+&lt;/div&gt;</code></pre>
+            </div>
+          </article>
+        </div>
+
+        <div class="back-top-wrap">
+          <a href="#top" class="back-top">↑ Back to top</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="results" class="content-section">
+      <div class="section-shell">
+        <div class="section-header">
+          <p class="section-kicker">Interactive Output</p>
+          <h2>Results</h2>
+          <p class="section-intro">
+            The final result includes a full interactive ArcGIS exploration experience. The web map
+            was prepared in ArcGIS Online, popup logic was enhanced using Arcade, and the final guided
+            user interface was built in ArcGIS Experience Builder.
+          </p>
+        </div>
+
+        <div class="results-top-grid">
+          <div class="results-side-card">
+            <h3>What users can explore</h3>
+            <ul>
+              <li>Wildfire size classification</li>
+              <li>Cause of fire</li>
+              <li>Duration categories</li>
+              <li>Seasonal wildfire patterns</li>
+              <li>Complex vs non-complex incidents</li>
+            </ul>
+          </div>
+
+          <div class="results-side-card">
+            <h3>How to use the app</h3>
+            <ul>
+              <li>Select a topic from the app controls</li>
+              <li>Enable the matching layer in the layer panel</li>
+              <li>Use filters to refine the visible records</li>
+              <li>Click a fire feature to view popup details</li>
+            </ul>
+          </div>
+
+          <div class="results-side-card">
+            <h3>Platform Stack</h3>
+            <ul>
+              <li>ArcGIS Online Web Map</li>
+              <li>Arcade popup expressions</li>
+              <li>ArcGIS Experience Builder</li>
+              <li>Interactive thematic layer design</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="results-map-card full-width-map">
+          <div class="results-map-embed">
+            <iframe
+              src="https://experience.arcgis.com/experience/2c595892864a485facfdaaa054709e2d"
+              title="California Wildfire Explorer"
+              loading="lazy"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+
+        <div class="back-top-wrap">
+          <a href="#top" class="back-top">↑ Back to top</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="discussion" class="content-section">
+      <div class="section-shell">
+        <div class="section-header">
+          <p class="section-kicker">Interpretation</p>
+          <h2>Discussion</h2>
+          <p class="section-intro">
+            The wildfire explorer supports multi-dimensional investigation of wildfire behavior
+            across California by combining thematic classification, interactive filtering, and
+            guided map exploration.
+          </p>
+        </div>
+
+        <div class="discussion-grid discussion-grid-extended">
+          <article class="discussion-card">
+            <h3>Patterns in Fire Size</h3>
+            <p>
+              Fire size classification reveals strong spatial variation across California, with larger
+              fire classes concentrated in specific high-risk regions and smaller incidents appearing
+              more broadly across the state.
+            </p>
+          </article>
+
+          <article class="discussion-card">
+            <h3>Cause-Based Interpretation</h3>
+            <p>
+              Grouping causes into natural, human-related, and unknown categories helps simplify the
+              original source values and supports clearer comparison of ignition patterns.
+            </p>
+          </article>
+
+          <article class="discussion-card">
+            <h3>Temporal Insights</h3>
+            <p>
+              Discovery month, seasonal categories, and duration fields provide an accessible way to
+              examine wildfire timing without relying only on raw date fields.
+            </p>
+          </article>
+
+          <article class="discussion-card">
+            <h3>App Design Implications</h3>
+            <p>
+              The interactive app was intentionally designed around thematic layer exploration so users
+              can investigate one analytical question at a time instead of being overwhelmed by all
+              variables at once.
+            </p>
+          </article>
+
+          <article class="discussion-card">
+            <h3>Data Constraints</h3>
+            <p>
+              Some source records contain incomplete or inconsistent temporal information, which required
+              additional validation before duration-based fields could be used reliably.
+            </p>
+          </article>
+
+          <article class="discussion-card">
+            <h3>Why This Matters</h3>
+            <p>
+              Together, these layers and filters make it easier to understand not only where wildfires
+              occur, but how they differ in size, timing, cause, and operational context.
+            </p>
+          </article>
+        </div>
+
+        <div class="back-top-wrap">
+          <a href="#top" class="back-top">↑ Back to top</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="content-section">
+      <div class="section-shell">
+        <div class="section-header">
+          <p class="section-kicker">Project Context</p>
+          <h2>About</h2>
+        </div>
+
+        <div class="about-card">
+          <h3>California Wildfire Explorer</h3>
+          <p>
+            This project was developed as part of a Web GIS workflow focused on spatial analysis,
+            thematic visualization, and interactive exploration of historical wildfire patterns
+            across California.
+          </p>
+          <div class="about-meta">
+            <span>Tools: ArcGIS Pro, ArcGIS Online, Web Map, Arcade, Experience Builder, Carto</span>
+          </div>
+        </div>
+
+        <div class="back-top-wrap">
+          <a href="#top" class="back-top">↑ Back to top</a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
