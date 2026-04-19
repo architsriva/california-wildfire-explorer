@@ -316,7 +316,8 @@ canvas {
 .discussion-card h3,
 .limitations-panel h3,
 .about-card h3,
-.field-docs-title {
+.field-docs-title,
+.results-subsection-header h3 {
   margin: 0 0 12px;
   font-size: 1.25rem;
   font-weight: 700;
@@ -372,6 +373,10 @@ canvas {
 
 .method-grid-five {
   grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.method-grid-six {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .method-card,
@@ -535,6 +540,25 @@ canvas {
   display: block;
 }
 
+.results-subsection {
+  margin-top: 38px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.results-subsection-header {
+  margin-bottom: 8px;
+}
+
+.carto-map-card {
+  min-height: 980px;
+}
+
+.carto-map-card .results-map-embed,
+.carto-map-card .results-map-embed iframe {
+  height: 980px;
+}
+
 .results-side-column {
   display: grid;
   gap: 18px;
@@ -556,10 +580,61 @@ canvas {
   max-width: 760px;
 }
 
+.about-card-expanded {
+  max-width: 100%;
+}
+
+.about-card-expanded p + p {
+  margin-top: 16px;
+}
+
+.about-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.about-tool-item {
+  padding: 20px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.about-tool-item h4 {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.about-tool-item p {
+  margin: 0 0 12px;
+  color: rgba(234, 241, 255, 0.76);
+  line-height: 1.7;
+}
+
+.about-tool-item a {
+  color: #39d0ff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.about-tool-item a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
 .about-meta {
   margin-top: 18px;
   color: #39d0ff;
   font-weight: 600;
+}
+
+.about-meta-expanded {
+  display: grid;
+  gap: 10px;
 }
 
 .back-top-wrap {
@@ -594,7 +669,8 @@ canvas {
     grid-template-columns: 1fr;
   }
 
-  .method-grid-five {
+  .method-grid-five,
+  .method-grid-six {
     grid-template-columns: 1fr;
   }
 
@@ -639,7 +715,10 @@ canvas {
 
   .results-map-card.full-width-map,
   .results-map-card.full-width-map .results-map-embed,
-  .results-map-card.full-width-map .results-map-embed iframe {
+  .results-map-card.full-width-map .results-map-embed iframe,
+  .carto-map-card,
+  .carto-map-card .results-map-embed,
+  .carto-map-card .results-map-embed iframe {
     min-height: 620px;
     height: 620px;
   }
@@ -697,11 +776,13 @@ canvas {
   .about-card,
   .results-side-card,
   .limitations-panel,
-  .field-doc-card {
+  .field-doc-card,
+  .about-tool-item {
     padding: 20px;
   }
 
-  .split-doc {
+  .split-doc,
+  .about-tools-grid {
     grid-template-columns: 1fr;
   }
 
@@ -714,7 +795,10 @@ canvas {
 
   .results-map-card.full-width-map,
   .results-map-card.full-width-map .results-map-embed,
-  .results-map-card.full-width-map .results-map-embed iframe {
+  .results-map-card.full-width-map .results-map-embed iframe,
+  .carto-map-card,
+  .carto-map-card .results-map-embed,
+  .carto-map-card .results-map-embed iframe {
     min-height: 420px;
     height: 420px;
   }
