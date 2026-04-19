@@ -20,7 +20,7 @@
     <nav class="navbar">
       <div class="logo">
         <span class="logo-icon">🔥</span>
-        <span class="logo-text">California Wildfire Explorer</span>
+        <span class="logo-text">Wildfire</span>
       </div>
 
       <ul class="nav-links">
@@ -170,7 +170,7 @@
           </p>
         </div>
 
-        <div class="method-grid method-grid-five">
+        <div class="method-grid method-grid-six">
           <article class="method-card">
             <span class="method-step">01</span>
             <h3>Data Ingestion</h3>
@@ -199,6 +199,12 @@
             <span class="method-step">05</span>
             <h3>Experience Builder App</h3>
             <p>Built a guided exploration app with layer-based themes, filters, popup interaction, and usage instructions.</p>
+          </article>
+
+          <article class="method-card">
+            <span class="method-step">06</span>
+            <h3>CARTO Temporal Analysis</h3>
+            <p>Built a temporal analysis app in CARTO using custom SQL, timestamp parsing, cascading filters, a fire count formula widget, and a time series chart for decade, year, and month-based wildfire exploration.</p>
           </article>
         </div>
 
@@ -577,6 +583,64 @@ return text;</code></pre>
           </div>
         </div>
 
+        <div class="results-subsection">
+          <div class="results-subsection-header">
+            <p class="section-kicker">Temporal Exploration</p>
+            <h3>Carto Temporal Wildfire Explorer</h3>
+            <p class="section-intro">
+              This second interactive component focuses specifically on temporal analysis. It allows
+              users to filter wildfire records by decade, year, and month while updating the map,
+              fire count, and time series together in a single coordinated view.
+            </p>
+          </div>
+
+          <div class="results-top-grid">
+            <div class="results-side-card">
+              <h3>What users can explore</h3>
+              <ul>
+                <li>Wildfire activity by decade</li>
+                <li>Refinement by selected year</li>
+                <li>Refinement by selected month</li>
+                <li>Fire count for the current filtered selection</li>
+                <li>Temporal change shown through the time series chart</li>
+              </ul>
+            </div>
+
+            <div class="results-side-card">
+              <h3>How to use the app</h3>
+              <ul>
+                <li>Start by selecting a decade in the right-side filter panel</li>
+                <li>Use year to narrow the selected decade</li>
+                <li>Use month as a final temporal refinement step</li>
+                <li>Review the fire count and time series as the filters update</li>
+                <li>Use the map to inspect spatial distribution within the selected time range</li>
+              </ul>
+            </div>
+
+            <div class="results-side-card">
+              <h3>Platform Stack</h3>
+              <ul>
+                <li>Carto Builder</li>
+                <li>Custom SQL temporal source preparation</li>
+                <li>Category widgets for temporal filtering</li>
+                <li>Formula widget for fire count</li>
+                <li>Time series widget for temporal trend display</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="results-map-card carto-map-card">
+            <div class="results-map-embed">
+              <iframe
+                src="https://clausa.app.carto.com/map/a10520f5-f527-4196-ae3d-6bf812e25c28"
+                title="California Wildfire Temporal Explorer"
+                loading="lazy"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+        </div>
+
         <div class="back-top-wrap">
           <a href="#top" class="back-top">↑ Back to top</a>
         </div>
@@ -658,17 +722,78 @@ return text;</code></pre>
         <div class="section-header">
           <p class="section-kicker">Project Context</p>
           <h2>About</h2>
+          <p class="section-intro">
+            This project combines desktop GIS, web mapping, and cloud-based temporal visualization
+            to create a multi-part wildfire exploration experience for California.
+          </p>
         </div>
 
-        <div class="about-card">
+        <div class="about-card about-card-expanded">
           <h3>California Wildfire Explorer</h3>
           <p>
-            This project was developed as part of a Web GIS workflow focused on spatial analysis,
-            thematic visualization, and interactive exploration of historical wildfire patterns
-            across California.
+            California Wildfire Explorer is a web-based GIS project designed to examine wildfire
+            patterns across California through both thematic and temporal analysis. The application
+            brings together a custom website interface, an ArcGIS Experience Builder app for guided
+            thematic exploration, and a CARTO app for time-based filtering by decade, year, and month.
           </p>
-          <div class="about-meta">
-            <span>Tools: ArcGIS Pro, ArcGIS Online, Web Map, Arcade, Experience Builder, Carto</span>
+
+          <p>
+            The project workflow began in <strong>ArcGIS Pro</strong>, where the wildfire dataset
+            was reviewed, cleaned, enriched with derived fields, and prepared for publication. Those
+            outputs were then published and configured in <strong>ArcGIS Online</strong>, where the
+            wildfire web map was symbolized and enhanced with Arcade popup expressions. The guided
+            thematic app was created in <strong>ArcGIS Experience Builder</strong>, while the temporal
+            exploration component was developed in <strong>CARTO Builder</strong> using custom SQL,
+            timestamp parsing, filter widgets, a fire count formula widget, and a time series chart.
+          </p>
+
+          <div class="about-tools-grid">
+            <div class="about-tool-item">
+              <h4>ArcGIS Pro</h4>
+              <p>
+                Used for data preparation, field creation, spatial analysis, validation, and publishing
+                workflow setup.
+              </p>
+              <a href="https://www.esri.com/en-us/arcgis/products/arcgis-pro/overview" target="_blank" rel="noopener noreferrer">
+                Learn more about ArcGIS Pro
+              </a>
+            </div>
+
+            <div class="about-tool-item">
+              <h4>ArcGIS Online</h4>
+              <p>
+                Used to host and manage the wildfire web map and support interactive web-based GIS delivery.
+              </p>
+              <a href="https://www.esri.com/en-us/arcgis/products/arcgis-online/overview" target="_blank" rel="noopener noreferrer">
+                Learn more about ArcGIS Online
+              </a>
+            </div>
+
+            <div class="about-tool-item">
+              <h4>ArcGIS Experience Builder</h4>
+              <p>
+                Used to build the guided thematic application with filters, layout components, and interactive exploration.
+              </p>
+              <a href="https://www.esri.com/en-us/arcgis/products/arcgis-experience-builder/overview" target="_blank" rel="noopener noreferrer">
+                Learn more about ArcGIS Experience Builder
+              </a>
+            </div>
+
+            <div class="about-tool-item">
+              <h4>CARTO Builder</h4>
+              <p>
+                Used for the temporal wildfire explorer, including decade, year, and month filtering,
+                time series display, and dashboard-style analysis.
+              </p>
+              <a href="https://carto.com/builder" target="_blank" rel="noopener noreferrer">
+                Learn more about CARTO Builder
+              </a>
+            </div>
+          </div>
+
+          <div class="about-meta about-meta-expanded">
+            <span><strong>Project Focus:</strong> Historical wildfire visualization and temporal exploration across California</span>
+            <span><strong>Core Tools:</strong> ArcGIS Pro, ArcGIS Online, Arcade, Experience Builder, CARTO, HTML, CSS, JavaScript</span>
           </div>
         </div>
 
