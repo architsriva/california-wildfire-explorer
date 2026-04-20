@@ -23,14 +23,59 @@
         <span class="logo-text">Wildfire</span>
       </div>
 
-      <ul class="nav-links">
-        <li><a href="#home" class="active">Home</a></li>
-        <li><a href="#data">Data & Sources</a></li>
-        <li><a href="#methodology">Methodology</a></li>
-        <li><a href="#results">Results</a></li>
-        <li><a href="#discussion">Discussion</a></li>
-        <li><a href="#about">About</a></li>
-      </ul>
+      <div class="nav-left">
+        <ul class="nav-links">
+          <li><a href="#home" class="active">Home</a></li>
+          <li><a href="#data">Data & Sources</a></li>
+          <li><a href="#methodology">Methodology</a></li>
+          <li><a href="#results">Results</a></li>
+          <li><a href="#discussion">Discussion</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#connect">Connect</a></li>
+        </ul>
+
+        <div class="nav-profile">
+          <a
+            href="https://github.com/architsriva"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub profile"
+            title="GitHub profile"
+          >
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/github.svg" alt="GitHub">
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/archit-srivastava-278aa350/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn profile"
+            title="LinkedIn profile"
+          >
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg" alt="LinkedIn">
+          </a>
+
+          <a
+            href="https://storymaps.arcgis.com/stories/b869928f843b4d308f7d255503ce3fa4"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="StoryMap project"
+            title="StoryMap project"
+          >
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/arcgis.svg" alt="StoryMap">
+          </a>
+
+          <a
+            href="https://community.esri.com/t5/user/viewprofilepage/user-id/59475"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Esri Community profile"
+            title="Esri Community profile"
+          >
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/esri.svg" alt="Esri Community">
+          </a>
+        </div>
+      </div>
     </nav>
 
     <section id="home" class="hero">
@@ -41,6 +86,28 @@
             An interactive geospatial exploration of wildfire distribution, intensity,
             and spatial trends across California.
           </p>
+
+          <div class="creator-banner">
+            <span class="creator-label">Created by Archit Srivastava</span>
+            <div class="creator-banner-links">
+              <a href="https://www.linkedin.com/in/archit-srivastava-278aa350/" target="_blank" rel="noopener noreferrer">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg" alt="LinkedIn">
+                <span>LinkedIn</span>
+              </a>
+              <a href="https://github.com/architsriva" target="_blank" rel="noopener noreferrer">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/github.svg" alt="GitHub">
+                <span>GitHub</span>
+              </a>
+              <a href="https://storymaps.arcgis.com/stories/b869928f843b4d308f7d255503ce3fa4" target="_blank" rel="noopener noreferrer">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/arcgis.svg" alt="StoryMap">
+                <span>StoryMap</span>
+              </a>
+              <a href="https://community.esri.com/t5/user/viewprofilepage/user-id/59475" target="_blank" rel="noopener noreferrer">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/esri.svg" alt="Esri Community">
+                <span>Esri Community</span>
+              </a>
+            </div>
+          </div>
 
           <div class="hero-actions">
             <a href="#results" class="cta-btn">Explore Results</a>
@@ -66,7 +133,7 @@
             This project uses historical wildfire perimeter data and supporting reference datasets
             to examine wildfire patterns across California. The main source is CAL FIRE FRAP, and
             the additional derived fields support filtering, comparison, and interpretation in the
-            web map and app.
+            Webmaps and Applications.
           </p>
         </div>
 
@@ -572,14 +639,17 @@ return text;</code></pre>
           </div>
         </div>
 
-        <div class="results-map-card full-width-map">
-          <div class="results-map-embed">
-            <iframe
-              src="https://experience.arcgis.com/experience/2c595892864a485facfdaaa054709e2d"
-              title="California Wildfire Explorer"
-              loading="lazy"
-              allowfullscreen>
-            </iframe>
+        <div class="carto-frame-wrap">
+          <div class="carto-frame-label">Embedded ArcGIS Experience Builder application</div>
+          <div class="results-map-card full-width-map">
+            <div class="results-map-embed">
+              <iframe
+                src="https://experience.arcgis.com/experience/2c595892864a485facfdaaa054709e2d"
+                title="California Wildfire Explorer"
+                loading="lazy"
+                allowfullscreen>
+              </iframe>
+            </div>
           </div>
         </div>
 
@@ -629,14 +699,17 @@ return text;</code></pre>
             </div>
           </div>
 
-          <div class="results-map-card carto-map-card">
-            <div class="results-map-embed">
-              <iframe
-                src="https://clausa.app.carto.com/map/a10520f5-f527-4196-ae3d-6bf812e25c28"
-                title="California Wildfire Temporal Explorer"
-                loading="lazy"
-                allowfullscreen>
-              </iframe>
+          <div class="carto-frame-wrap">
+            <div class="carto-frame-label">Embedded CARTO temporal analysis application</div>
+            <div class="results-map-card carto-map-card themed-carto-card">
+              <div class="results-map-embed">
+                <iframe
+                  src="https://clausa.app.carto.com/map/a10520f5-f527-4196-ae3d-6bf812e25c28"
+                  title="California Wildfire Temporal Explorer"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
             </div>
           </div>
         </div>
@@ -795,6 +868,72 @@ return text;</code></pre>
             <span><strong>Project Focus:</strong> Historical wildfire visualization and temporal exploration across California</span>
             <span><strong>Core Tools:</strong> ArcGIS Pro, ArcGIS Online, Arcade, Experience Builder, CARTO, HTML, CSS, JavaScript</span>
           </div>
+        </div>
+
+        <div class="back-top-wrap">
+          <a href="#top" class="back-top">↑ Back to top</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="connect" class="content-section">
+      <div class="section-shell">
+        <div class="section-header">
+          <p class="section-kicker">Creator</p>
+          <h2>Connect & Profiles</h2>
+          <p class="section-intro">
+            Learn more about my background, technical interests, and other work across GIS,
+            web mapping, and geospatial communication.
+          </p>
+        </div>
+
+        <div class="connect-grid">
+          <article class="connect-card connect-card-wide">
+            <h3>About Me</h3>
+            <p>
+            I am a GIS professional with strong experience in ArcGIS Enterprise, web GIS, and geospatial solution design. 
+            My work focuses on building practical GIS applications that turn spatial data into useful, accessible tools for users and stakeholders. 
+            Along with my background in ArcGIS platforms, I also work with web mapping, automation, and custom application development to create solutions that are both technically reliable and easy to use.
+            I am especially interested in designing GIS systems that combine strong functionality, clear structure, and real-world value.
+            </p>
+            <div class="skills-list">
+              <span>ArcGIS Enterprise</span>
+              <span>ArcGIS Pro</span>
+              <span>ArcGIS Online</span>
+              <span>Arcade</span>
+              <span>Experience Builder</span>
+              <span>CARTO</span>
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>JavaScript</span>
+              <span>Web GIS</span>
+              <span>Interactive Mapping</span>
+            </div>
+          </article>
+
+          <article class="connect-card">
+            <h3>GitHub</h3>
+            <p>Project repositories, code work, and technical experiments.</p>
+            <a href="https://github.com/architsriva" target="_blank" rel="noopener noreferrer">Visit GitHub profile</a>
+          </article>
+
+          <article class="connect-card">
+            <h3>LinkedIn</h3>
+            <p>Professional profile, background, and broader work experience.</p>
+            <a href="https://www.linkedin.com/in/archit-srivastava-278aa350/" target="_blank" rel="noopener noreferrer">Visit LinkedIn profile</a>
+          </article>
+
+          <article class="connect-card">
+            <h3>StoryMap</h3>
+            <p>Related web-based storytelling and interactive GIS presentation work.</p>
+            <a href="https://storymaps.arcgis.com/stories/b869928f843b4d308f7d255503ce3fa4" target="_blank" rel="noopener noreferrer">Open StoryMap</a>
+          </article>
+
+          <article class="connect-card">
+            <h3>Esri Community</h3>
+            <p>Community activity, public profile, and geospatial platform engagement.</p>
+            <a href="https://community.esri.com/t5/user/viewprofilepage/user-id/59475" target="_blank" rel="noopener noreferrer">Open Esri Community profile</a>
+          </article>
         </div>
 
         <div class="back-top-wrap">
